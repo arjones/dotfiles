@@ -1,10 +1,11 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH"
+# Add brew coreutils to PATH
+export PATH="$HOME/bin:$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.{path,git_bash_autocompletion,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && source "$file"
 done
 unset file
@@ -29,8 +30,10 @@ done
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
 
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
+# Add tab completion for SSH hostnames based on ~/.ssh/known_hosts
+[ -e "$HOME/.ssh/known_hosts" ] && complete -o "default" -o "nospace" -W "$(/usr/bin/awk -F, '{print $1}' $HOME/.ssh/known_hosts)" scp sftp ssh
+
+# Add GIT 
 
 # Add tab completion for `defaults read|write NSGlobalDomain`
 # You could just use `-g` instead, but I like being explicit
