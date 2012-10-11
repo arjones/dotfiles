@@ -33,14 +33,20 @@
 #       to the branch name.  You can configure this per-repository
 #       with the bash.showDirtyState variable, which defaults to true
 #       once GIT_PS1_SHOWDIRTYSTATE is enabled.
+export GIT_PS1_SHOWDIRTYSTATE=1
+
 #
 #       You can also see if currently something is stashed, by setting
 #       GIT_PS1_SHOWSTASHSTATE to a nonempty value. If something is stashed,
 #       then a '$' will be shown next to the branch name.
+export GIT_PS1_SHOWSTASHSTATE=1
+
 #
 #       If you would like to see if there're untracked files, then you can
 #       set GIT_PS1_SHOWUNTRACKEDFILES to a nonempty value. If there're
 #       untracked files, then a '%' will be shown next to the branch name.
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+
 #
 # To submit patches:
 #
