@@ -31,7 +31,7 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
 
 # Add tab completion for SSH hostnames based on ~/.ssh/known_hosts
-[ -e "$HOME/.ssh/known_hosts" ] && complete -o "default" -o "nospace" -W "$(/usr/bin/awk -F, '{print $1}' $HOME/.ssh/known_hosts)" scp sftp ssh
+[ -e "$HOME/.ssh/known_hosts" ] && complete -o "default" -o "nospace" -W "$(cut -f1 -d','  $HOME/.ssh/known_hosts | cut -f1 -d' ')" scp sftp ssh
 
 # Add GIT 
 
